@@ -1,0 +1,32 @@
+(defun removeNILTop (L)
+	(cond ( (NULL L) NIL)
+		  ( (NULL (CAR L)) (removeNILTop (CDR L)) )
+		  ( (CONS (CAR L) (removeNILTop (CDR L)) ) )
+	)
+)
+
+(defun removeNILMost (L)
+	(cond ( (NULL L) NIL)
+		  ( (NULL (CAR L)) (removeNILMost (CDR L)) )
+		  ( (ATOM (CAR L)) (CONS (CAR L) (removeNILMost (CDR L)) ) )
+		  ( (CONS (removeNILMost(CAR L)) (removeNILMost (CDR L)) ) )
+	)
+)
+
+(defun reverseTop (L)
+	(cond ( (NULL L) NIL)
+		  ( (APPEND (reverseTop (CDR L)) (list (CAR L)) ) )
+	)
+)
+
+(defun reverseAll (L)
+	(cond ( (NULL L) NIL)
+		  ( (ATOM (CAR L)) (APPEND (reverseAll (CDR L)) (list (CAR L)) ) )
+		  ( (APPEND (list (reverseTop (CDR L)) (reverseTop (CAR L))) ) )
+	
+	)
+)
+
+(defun palindrome (L)
+	(EQUAL L reverseTop(L) )
+)
